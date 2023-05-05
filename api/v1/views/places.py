@@ -125,8 +125,8 @@ def places_search():
     of the request
     """
 
-    if request.get_json() is None:
-        abort(400, description="Not a JSON")
+    if not request.is_json:
+        return make_response(jsonify("Not a JSON"), 400)
 
     data = request.get_json()
 
@@ -172,6 +172,7 @@ def places_search():
                                for am in amenities_obj])]
 
     places = []
+    list_places = sorted(list_places, key=lambda place: place.name)
     for p in list_places:
         d = p.to_dict()
         d.pop('amenities', None)
