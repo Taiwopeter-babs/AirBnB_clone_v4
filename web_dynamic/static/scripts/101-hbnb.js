@@ -136,7 +136,7 @@ function getAllPlaces(amenityList, stateIds, cityIds) {
           const $divNumberBathRoom = $('<div>',
             { class: 'number_bathrooms' });
 
-          const reviewContainer = reviewsToggle(obj.id);
+          const reviewContainer = getReviews(obj.id);
 
           // Place description
           const $divUser = $('<div>', { class: 'user' });
@@ -191,9 +191,8 @@ function getAllPlaces(amenityList, stateIds, cityIds) {
     }
   });
 }
-
-function reviewsToggle(placeId) {
-  // let numberReviews = 0;
+// Get reviews of a place
+function getReviews(placeId) {
   const $divReview = $('<div>', { class: 'reviews' });
   const $unList = $('<ul>');
 
@@ -222,12 +221,10 @@ function reviewsToggle(placeId) {
       $unList.appendTo($divReview);
     }
   });
-
   return $divReview;
 }
 
 //toggle the review button
-
 function reviewToggler() {
   $('section.places').on('click', 'div.head span', function () {
     if ($(this).html() === 'show') {
